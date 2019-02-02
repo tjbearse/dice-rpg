@@ -25,15 +25,12 @@ class Card extends Component {
 				</p>
 				<div className="nap">
 					<div className="dice">
-					{ action.dice.map( d => <Die die={d} key={d.id}/> ) }
-					<p className="effect">
-						{action.getEffectText()}
-					</p>
-					{ reusable && <p className="reuse"> { reusable } </p> }
-				<p>
-
-				</p>
+						{ action.dice.map( d => <Die die={d} key={d.id}/> ) }
+						<p className="effect">
+							{action.getEffectText()}
+						</p>
 					</div>
+					{ reusable && <p className="reuse"> { reusable } </p> }
 				</div>
 			</div>
 		);

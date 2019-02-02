@@ -2,6 +2,7 @@ $blue: #577590;
 $blue-shade: darken($blue, 10%);
 $blue-tint: lighten($blue, 25%);
 
+/*
 $yellow: #FFBC42;
 $yellow-shade: darken($yellow, 25%);
 $yellow-tint: lighten($yellow, 25%);
@@ -17,6 +18,10 @@ $lblue-tint: lighten($lblue, 25%);
 $green: #B4DC7F;
 $green-shade: darken($green, 25%);
 $green-tint: lighten($green, 25%);
+*/
+
+$white: white;
+$grey: darken(white, 20%);
 
 $i8: 1in / 8;
 $i16: 1in / 16;
@@ -34,18 +39,24 @@ p {
 
 .cards {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	
 	.card {
-		position: relative;
-		color: white;
 		margin: .125in;
 		width: 2.5in;
 		height: 3.5in;
-
 		border-radius: .125in;
 		padding: (1in / 8);
 
+		flex: 0 0 auto;
+
+		color: white;
 		background-color: $blue-shade;
+
+		display: flex;
+		flex-direction: column;
+
 
 		$titleSize: 3*$i16;
 		p.name {
@@ -55,13 +66,15 @@ p {
 		}
 
 		.nap {
-			position: absolute;
 			bottom: $i8;
 			left: $i8;
 			right: $i8;
 			background-color: $blue;
 			border-radius: (1.0in / 8);
-			height: 3.5in - $i8 * 3 - 2*$titleSize;
+			flex: 1 0 auto;
+
+			display: flex;
+			flex-direction: column;
 		}
 
 		.dice {
@@ -73,9 +86,7 @@ p {
 			align-content: center;
 			justify-content: center;
 
-			height: 100%;
-			// height: $dice-width * 3 + .125in * 4;
-			// padding: .125in;
+			flex: 1 0 auto;
 
 			.die {
 				width: $dice-width;
@@ -100,6 +111,11 @@ p {
 			text-align: center;
 			align-self: flex-end;
 			width: 100%; // forces onto bottom
+		}
+
+		p.reuse {
+			color: $grey;
+			text-align: center;
 		}
 
 	}
