@@ -1,29 +1,106 @@
+$blue: #577590;
+$blue-shade: darken($blue, 10%);
+$blue-tint: lighten($blue, 25%);
 
-.card {
-	width: 2.25in; /* 2.5 - 2*.125 */
-	height: 3.25in; /* 3.5 - 2*.125 */
+$yellow: #FFBC42;
+$yellow-shade: darken($yellow, 25%);
+$yellow-tint: lighten($yellow, 25%);
 
-	border-radius: .125in;
-	border: solid blue .125in;
+$flame: #E4572E;
+$flame-shade: darken($flame, 25%);
+$flame-tint: lighten($flame, 25%);
 
-	background-color: red;
+$lblue: #23B5D3;
+$lblue-shade: darken($lblue, 25%);
+$lblue-tint: lighten($lblue, 25%);
 
+$green: #B4DC7F;
+$green-shade: darken($green, 25%);
+$green-tint: lighten($green, 25%);
+
+$i8: 1in / 8;
+$i16: 1in / 16;
+$i32: 1in / 32;
+
+body {
 }
 
-.card .dice {
-	margin: auto;
+p {
+	margin: .125in;
+}
+* {
+	box-sizing: border-box;
 }
 
-.card .effect {
-	width: 100%;
-	text-align: center;
-}
+.cards {
+	display: flex;
+	
+	.card {
+		position: relative;
+		color: white;
+		margin: .125in;
+		width: 2.5in;
+		height: 3.5in;
 
-.die {
-	width: .75in;
-	height: .75in;
-	border-radius: .125in;
-	margin: auto;
+		border-radius: .125in;
+		padding: (1in / 8);
 
-	background-color: blue;
+		background-color: $blue-shade;
+
+		$titleSize: 3*$i16;
+		p.name {
+			font-size: $titleSize;
+			margin: 0 0 .125in 0;
+			text-align: center;
+		}
+
+		.nap {
+			position: absolute;
+			bottom: $i8;
+			left: $i8;
+			right: $i8;
+			background-color: $blue;
+			border-radius: (1.0in / 8);
+			height: 3.5in - $i8 * 3 - 2*$titleSize;
+		}
+
+		.dice {
+			$dice-width: 16mm;
+			
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			align-content: center;
+			justify-content: center;
+
+			height: 100%;
+			// height: $dice-width * 3 + .125in * 4;
+			// padding: .125in;
+
+			.die {
+				width: $dice-width;
+				height: $dice-width;
+				border-radius: 3mm;
+				border: solid $blue-shade (1in/32);
+
+				color: white;
+				margin: 1mm;
+				p {
+					display:flex;
+					justify-content:center;
+					align-items:center;
+					width: $dice-width - 2*$i32;
+					height: $dice-width - 2*$i32;
+					margin: 0;
+				}
+			}
+		}
+
+		p.effect {
+			text-align: center;
+			align-self: flex-end;
+			width: 100%; // forces onto bottom
+		}
+
+	}
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Actions from './actions';
+import Actions from './myActions';
 
 ReactDOM.render(<App actions={Actions} />, document.getElementById('root'));
 

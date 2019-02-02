@@ -1,21 +1,40 @@
 import React, { Component } from 'react';
 import './App.scss';
 
+class App extends Component {
+	render() {
+		let actions = this.props.actions || []
+		return (<div className="cards">
+				{ actions.map( a => <Card action={a} key={a.id}/> ) }
+				</div>);
+	}
+}
+
 class Card extends Component {
 	render() {
 		let action = this.props.action;
 		if (!action) {
 			return ''
 		}
+		let reusable = action.getReusableText();
 		return (
+			// TODO color switching
 			<div className="card">
-				Card
-				<div className="dice">
-				{ action.dice.map( d => <Die die={d} key={d.id}/> ) }
-				</div>
-				<p className="effect">
-					{action.effect}
+				<p className="name">
+					{ action.name }
 				</p>
+				<div className="nap">
+					<div className="dice">
+					{ action.dice.map( d => <Die die={d} key={d.id}/> ) }
+					<p className="effect">
+						{action.getEffectText()}
+					</p>
+					{ reusable && <p className="reuse"> { reusable } </p> }
+				<p>
+
+				</p>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -25,20 +44,12 @@ class Die extends Component {
 	render() {
 		return (
 				<div className="die">
-				Die
+					<p> Die </p>
 				</div>
 		);
 	}
 }
 
-class App extends Component {
-	render() {
-		let actions = this.props.actions || []
-		return (<div>
-				{ actions.map( a => <Card action={a} key={a.id}/> ) }
-				</div>);
-	}
-}
 
 
 export default App;
