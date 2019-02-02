@@ -1,32 +1,29 @@
-.App {
-  text-align: center;
+
+.card {
+	width: 2.25in; /* 2.5 - 2*.125 */
+	height: 3.25in; /* 3.5 - 2*.125 */
+
+	border-radius: .125in;
+	border: solid blue .125in;
+
+	background-color: red;
+
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.card .dice {
+	margin: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.card .effect {
+	width: 100%;
+	text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
-}
+.die {
+	width: .75in;
+	height: .75in;
+	border-radius: .125in;
+	margin: auto;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	background-color: blue;
 }
