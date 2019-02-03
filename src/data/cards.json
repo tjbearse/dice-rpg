@@ -1,0 +1,39 @@
+[
+	{
+		"name": "Black Goop",
+		"format": "text",
+		"type": "attack",
+		"effect": "[ ] damage of last type taken",
+		"reusable": "",
+		"dice": [
+			{
+				"type": "Exact",
+				"val": 6
+			}
+		]
+	}, {
+		"name": "Unweildy Sword",
+		"format": "text",
+		"type": "attack",
+		"effect": "1 damage, twice",
+		"reusable": "",
+		"dice": [
+			{
+				"type": "CountDown",
+				"val": 7
+			}
+		]
+	}, {
+		"name": "Suit of Armor",
+		"format": "text",
+		"type": "defend",
+		"effect": "2 armor",
+		"reusable": "",
+		"dice": [
+			{
+				"type": "Max",
+				"val": 3
+			}
+		]
+	}
+]

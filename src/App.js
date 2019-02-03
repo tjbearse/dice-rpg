@@ -8,7 +8,6 @@ class App extends Component {
 		let actions = this.props.actions || []
 		return (<div className="cards">
 				{ actions.map( a => {
-					console.log(a, a instanceof Upgradable);
 					if (a instanceof Upgradable)
 						return <FlipCard actionPair={a} key={a.id()}/>
 					else
@@ -65,6 +64,11 @@ class FlipCard extends Component {
 		);
 	}
 }
+/* TODO
+	- Group
+	- Half card / compact view?
+	- Form for adding quickly
+*/
 
 
 

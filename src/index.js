@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Actions from './myActions';
 
+window.Actions = Actions;
+
 ReactDOM.render(<App actions={Actions} />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

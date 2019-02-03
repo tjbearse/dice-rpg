@@ -104,24 +104,26 @@ p {
 	}
 }
 
-.cards .card.type-a {
+.cards .card.type-attack {
+	@include card-color($flame);
+}
+.cards .card.type-defend {
 	@include card-color($blue);
 }
 .cards .card.type-b {
 	@include card-color($green);
 }
 .cards .card.type-c {
-	@include card-color($flame);
-}
-.cards .card.type-d {
 	@include card-color($yellow);
 }
 .cards .card.type-e {
 	@include card-color($lblue);
 }
-.cards .card.type-f {
+/*
+.cards .card {
 	@include card-color(grey);
 }
+*/
 
 
 .cards .flip{

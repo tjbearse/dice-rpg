@@ -42,7 +42,7 @@ class CountDown extends Component {
 	}
 }
 
-class Fixed extends Component {
+class Exact extends Component {
 	render() {
 		return (
 			<div className={"die fixed"}>
@@ -94,7 +94,7 @@ function getDieComp(d) {
 	if (d instanceof Model.Comparison) return Comparison;
 	if (d instanceof Model.Restricted) return Restricted; // must happen after comparison
 	if (d instanceof Model.CountDown) return CountDown;
-	if (d instanceof Model.Fixed) return Fixed;
+	if (d instanceof Model.Exact) return Exact;
 	if (d instanceof Model.Constant) return Constant;
 	return Die
 }

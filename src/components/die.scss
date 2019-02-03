@@ -60,6 +60,7 @@ $dice-width: 16mm;
 	}
 
 	&.fixed {
+		@extend .restricted;
 	}
 
 	&.constant {
