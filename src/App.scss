@@ -1,31 +1,4 @@
-$blue: #577590;
-$blue-shade: darken($blue, 10%);
-$blue-tint: lighten($blue, 25%);
-
-/*
-$yellow: #FFBC42;
-$yellow-shade: darken($yellow, 25%);
-$yellow-tint: lighten($yellow, 25%);
-
-$flame: #E4572E;
-$flame-shade: darken($flame, 25%);
-$flame-tint: lighten($flame, 25%);
-
-$lblue: #23B5D3;
-$lblue-shade: darken($lblue, 25%);
-$lblue-tint: lighten($lblue, 25%);
-
-$green: #B4DC7F;
-$green-shade: darken($green, 25%);
-$green-tint: lighten($green, 25%);
-*/
-
-$white: white;
-$grey: darken(white, 20%);
-
-$i8: 1in / 8;
-$i16: 1in / 16;
-$i32: 1in / 32;
+@import './components/constants';
 
 body {
 }
@@ -40,10 +13,11 @@ p {
 .cards {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-evenly;
+	align-content: space-evenly;
 	
 	.card {
-		margin: .125in;
+		margin: $i16;
 		width: 2.5in;
 		height: 3.5in;
 		border-radius: .125in;
@@ -78,33 +52,16 @@ p {
 		}
 
 		.dice {
-			$dice-width: 16mm;
 			
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
 			align-content: center;
-			justify-content: center;
+			justify-content: space-evenly;
 
 			flex: 1 0 auto;
 
-			.die {
-				width: $dice-width;
-				height: $dice-width;
-				border-radius: 3mm;
-				border: solid $blue-shade (1in/32);
-
-				color: white;
-				margin: 1mm;
-				p {
-					display:flex;
-					justify-content:center;
-					align-items:center;
-					width: $dice-width - 2*$i32;
-					height: $dice-width - 2*$i32;
-					margin: 0;
-				}
-			}
+			@import './components/die'
 		}
 
 		p.effect {
@@ -118,5 +75,43 @@ p {
 			text-align: center;
 		}
 
+	}
+}
+
+.cards .card.type-a {
+	color: yellow; //white, tint this?
+	background-color: green; // $blue-shade
+	.nap {
+		background-color: lightgreen; // $blue;
+	}
+	p.reuse {
+		color: black;// $grey;
+	}
+	.dice {
+		.die {
+			border-color: orange; // blue-shade
+			color: brown; // white
+			&.compare{
+				// @include stripe(orange); // was blue-shade
+			}
+			&.constant {
+				background-color: red; // $blue-tint;
+				/*
+						// combine # { 
+						box-shadow: # {
+							inset 0 $s white,
+							inset 0 (-$s) #bbb,
+							inset $s 0 #d7d7d7,
+							inset (-$s) 0 #d7d7d7};
+			   */
+				.pip {
+					background-color: grey; // $blue-shade;
+					// box-shadow: inset 0 2px #111, inset 0 -2px #555;
+				}
+			}
+			.pip {
+				background-color: grey; // $blue-shade;
+			}
+		}
 	}
 }

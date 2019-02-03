@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
+import getDieComp from './components/die';
 
 class App extends Component {
 	render() {
@@ -13,19 +14,23 @@ class App extends Component {
 class Card extends Component {
 	render() {
 		let action = this.props.action;
+		console.log(action);
 		if (!action) {
 			return ''
 		}
 		let reusable = action.getReusableText();
 		return (
 			// TODO color switching
-			<div className="card">
+			<div className={"card type-"+ action.type}>
 				<p className="name">
 					{ action.name }
 				</p>
 				<div className="nap">
 					<div className="dice">
-						{ action.dice.map( d => <Die die={d} key={d.id}/> ) }
+						{ action.dice.map( d => {
+							let D = getDieComp(d);
+							return <D die={d} key={d.id}/>
+										}) }
 						<p className="effect">
 							{action.getEffectText()}
 						</p>
@@ -33,16 +38,6 @@ class Card extends Component {
 					{ reusable && <p className="reuse"> { reusable } </p> }
 				</div>
 			</div>
-		);
-	}
-}
-
-class Die extends Component {
-	render() {
-		return (
-				<div className="die">
-					<p> Die </p>
-				</div>
 		);
 	}
 }

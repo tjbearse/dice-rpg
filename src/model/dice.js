@@ -2,13 +2,63 @@
 const getID = () => 'die_' + Math.random().toString(36).substr(2, 9);
 
 class Die {
-	// input restriction (text, expr)
-	// 
-	constructor(restrText) {
-		this.text = restrText;
+	constructor() {
 		this.id = getID()
 	}
-
 }
 
-export {Die}
+class Fixed extends Die{
+	constructor(n) {
+		super()
+		this.val = n;
+	}
+}
+
+class Comparison extends Die {
+	constructor(text, n) {
+		super()
+		this.text = text;
+		this.val = n;
+	}
+}
+
+class Max extends Comparison {
+	constructor(n) {
+		super("MAX", n)
+	}
+}
+
+class Min extends Comparison {
+	constructor(n) {
+		super("MIN", n)
+	}
+}
+
+class CountDown extends Die {
+	constructor(n) {
+		super()
+		this.val = n;
+	}
+}
+
+class Constant extends Die {
+	constructor(n) {
+		super()
+		this.val = n;
+	}
+}
+
+/* TODO
+   - Constant val
+   - Even / Odd
+*/
+
+export {
+	Comparison,
+	Constant,
+	CountDown,
+	Die,
+	Fixed,
+	Max,
+	Min,
+}

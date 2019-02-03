@@ -1,0 +1,28 @@
+$blue: lighten(#577590, 5%);
+$blue-shade: darken($blue, 15%);
+$blue-tint: lighten($blue, 25%);
+
+/*
+$yellow: #FFBC42;
+$yellow-shade: darken($yellow, 25%);
+$yellow-tint: lighten($yellow, 25%);
+
+$flame: #E4572E;
+$flame-shade: darken($flame, 25%);
+$flame-tint: lighten($flame, 25%);
+
+$lblue: #23B5D3;
+$lblue-shade: darken($lblue, 25%);
+$lblue-tint: lighten($lblue, 25%);
+
+$green: #B4DC7F;
+$green-shade: darken($green, 25%);
+$green-tint: lighten($green, 25%);
+*/
+
+$white: white;
+$grey: darken(white, 20%);
+
+$i8: 1in / 8;
+$i16: 1in / 16;
+$i32: 1in / 32;
