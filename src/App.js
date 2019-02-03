@@ -3,9 +3,8 @@ import './App.scss';
 import {Upgradable} from './model/actions';
 import {Card, FlipCard} from './components/cards';
 import {CardForm} from './components/cardForm';
-import Actions from './myActions';
 
-import {getActions} from './backend';
+import {Actions} from './backend';
 
 
 class App extends Component {
@@ -18,7 +17,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		getActions()
+		Actions.get()
 			.then(actions => {
 				this.setState({
 					actions
@@ -32,6 +31,7 @@ class App extends Component {
 		this.setState({
 			actions: [a, ...this.state.actions],
 		});
+		Actions.post(a)
 	}
 
 	render() {

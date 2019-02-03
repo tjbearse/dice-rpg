@@ -32,7 +32,7 @@ class Upgradable extends idMixin(Base) {
 }
 
 class TextAction extends Action {
-	constructor(name, type, effect, reusable, dice) {
+	constructor(name='', type='', effect='', reusable='', dice=[]) {
 		super(name, type, dice)
 		if (typeof effect !== "string") throw Error("effect is not a string");
 		if (typeof reusable !== "string") throw Error("reusable is not a string");
@@ -50,7 +50,10 @@ class TextAction extends Action {
 
 	static fromJSON(json) {
 		let dice = json.dice || []
-		return new TextAction(json.name, json.type, json.effect, json.reusable, dice.map(dieFromJSON))
+		let a = new TextAction(json.name, json.type, json.effect, json.reusable, dice.map(dieFromJSON))
+		if (json.id)
+			a._id = json.id
+		return a;
 	}
 }
 
@@ -58,9 +61,11 @@ const ActionTypes = {
 	TextAction,
 }
 
+// FIXME ID not propagated
 function actionFromJSON(a) {
 	if (!(a.format in ActionTypes)) {
-		throw Error(a.format + " not in ActionTypes");
+		a.format = 'TextAction';
+		// throw Error(a.format + " not in ActionTypes");
 	}
 	return ActionTypes[a.format].fromJSON(a)
 }
