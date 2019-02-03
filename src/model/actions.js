@@ -1,6 +1,6 @@
-const getID = () => 'action_' + Math.random().toString(36).substr(2, 9);
+import {Base, idMixin} from './mixins';
 
-class Action {
+class Action extends idMixin(Base) {
 	// one or more Dice
 	// Effect
 	// reusable or not
@@ -8,9 +8,9 @@ class Action {
 		if (!typeof name === "string") throw Error("name is not a string");
 		if (!typeof type === "string") throw Error("type is not a string");
 		if (!typeof dice === "array") throw Error("dice is not an array");
+		super()
 		this.name = name
 		this.dice = dice
-		this.id = getID()
 		this.type = type
 	}
 
@@ -19,6 +19,13 @@ class Action {
 	}
 	getReusableText() {
 		return '';
+	}
+}
+
+class Upgradable extends idMixin(Base) {
+	constructor(base, upgrade) {
+		super()
+		this.actions = [base, upgrade];
 	}
 }
 
@@ -39,4 +46,4 @@ class TextAction extends Action {
 
 }
 
-export {Action, TextAction}
+export {Action, TextAction, Upgradable}

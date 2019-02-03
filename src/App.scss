@@ -38,14 +38,12 @@ p {
 		}
 
 		.nap {
-			bottom: $i8;
-			left: $i8;
-			right: $i8;
 			border-radius: (1.0in / 8);
-			flex: 1 0 auto;
+			flex: 1 1 auto;
 
 			display: flex;
 			flex-direction: column;
+			justify-content: space-evenly;
 		}
 
 		.dice {
@@ -123,4 +121,38 @@ p {
 }
 .cards .card.type-f {
 	@include card-color(grey);
+}
+
+
+.cards .flip{
+	.card {
+		height: (3.5in /2);
+		border-radius: .125in .125in 0 0;
+		margin-bottom: 0;
+		padding-bottom: $i32;
+		.name {
+			margin-bottom: $i32;
+		}
+		.nap {
+			margin-bottom: 0px;
+			.dice {
+				.die {
+				}
+				p.effect {
+					margin-top: $i32;
+					margin-bottom: $i32;
+				}
+			}
+			p.reuse {
+				flex: 1 1 auto;
+				margin-top: $i32;
+				margin-bottom: $i16;
+			}
+		}
+	}
+	.card.flipped {
+		transform: rotate(180deg);
+		margin-top: 0;
+		margin-bottom: $i16;
+	}
 }

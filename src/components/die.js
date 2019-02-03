@@ -24,7 +24,6 @@ class Comparison extends Component {
 
 class Restricted extends Component {
 	render() {
-		console.log("ok");
 		return (
 			<div className="die restricted">
 				<p> {this.props.die.text} </p>

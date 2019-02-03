@@ -1,10 +1,6 @@
+import {Base, idMixin} from './mixins';
 
-const getID = () => 'die_' + Math.random().toString(36).substr(2, 9);
-
-class Die {
-	constructor() {
-		this.id = getID()
-	}
+class Die extends idMixin(Base) {
 }
 
 class Fixed extends Die{
