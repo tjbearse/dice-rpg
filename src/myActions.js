@@ -10,7 +10,9 @@ const Actions = [
 	new TextAction("Vorpal Sword", "a", [new Die(), new Constant(3), new Fixed(4), new Max(3), new Odd(), new CountDown(3)], "[ ] Damage", "Reuse all the time"),
 	new TextAction("Vorpal Sword", "b", [new Die(), new Constant(3), new Fixed(4), new Min(3), new Odd(), new CountDown(3)], "[ ] Damage", "Reuse all the time"),
 	new TextAction("Vorpal Sword", "c", [new Die(), new Constant(3), new Fixed(4), new Max(3), new Odd(), new CountDown(3)], "[ ] Damage", "Reuse all the time"),
-
+	new TextAction("Vorpal Sword", "d", [new Die(), new Constant(3), new Fixed(4), new Max(3), new Odd(), new CountDown(3)], "[ ] Damage", "Reuse all the time"),
+	new TextAction("Vorpal Sword", "e", [new Die(), new Constant(3), new Fixed(4), new Min(3), new Odd(), new CountDown(3)], "[ ] Damage", "Reuse all the time"),
+	new TextAction("Vorpal Sword", "f", [new Die(), new Constant(3), new Fixed(4), new Max(3), new Odd(), new CountDown(3)], "[ ] Damage", "Reuse all the time"),
 	new TextAction("Boots of Fixed Values", "a", [...Array(6).keys()].map((i) => new Fixed(i+1)), "4 D, typeamage"),
 	new TextAction("Boots of Fixed Values", "b", [...Array(6).keys()].map((i) => new Fixed(i+1)), "4 D, typeamage"),
 	new TextAction("Boots of Fixed Values", "c", [...Array(6).keys()].map((i) => new Fixed(i+1)), "4 D, typeamage"),

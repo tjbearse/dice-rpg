@@ -26,7 +26,7 @@ $dice-width: 16mm;
 	width: $dice-width;
 	height: $dice-width;
 	border-radius: 3mm;
-	border: dotted $blue-shade $i32;
+	border: dotted $i32;
 
 	color: white;
 	margin: 1mm;
@@ -37,7 +37,6 @@ $dice-width: 16mm;
 	flex-direction: column;
 
 	&.restricted {
-		@include stripe($blue-shade);
 		font-size: 14pt;
 	}
 	&.compare {
@@ -64,9 +63,8 @@ $dice-width: 16mm;
 	}
 
 	&.constant {
-		//TODO these tints could look better
-		@include dieBoxShadow($grey);
 		padding: $i32;
+		border:none;
 	}
 }
 
@@ -116,7 +114,5 @@ $dice-width: 16mm;
 		width: $w;
 		border-radius: 50%;
 		margin: 4px;
-
-		background-color: $blue-shade;
 	}
 }

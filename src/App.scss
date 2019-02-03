@@ -1,6 +1,7 @@
 @import './components/constants';
 
 body {
+	background-color: black;
 }
 
 p {
@@ -25,9 +26,6 @@ p {
 
 		flex: 0 0 auto;
 
-		color: white;
-		background-color: $blue-shade;
-
 		display: flex;
 		flex-direction: column;
 
@@ -43,7 +41,6 @@ p {
 			bottom: $i8;
 			left: $i8;
 			right: $i8;
-			background-color: $blue;
 			border-radius: (1.0in / 8);
 			flex: 1 0 auto;
 
@@ -71,40 +68,39 @@ p {
 		}
 
 		p.reuse {
-			color: $grey;
 			text-align: center;
 		}
 
 	}
 }
 
-@mixin card-color($baseColor) {
+@mixin card-color($base) {
 	$white: white;
-	$shade: darken($baseColor, 15%);
-	$tint: lighten($baseColor, 20%);
+	$shade: darken($base, 15%);
+	$tint: lighten($base, 20%);
 
 	
 	color: $white; //tint this?
-	background-color: $shade;
+	background-color: $base;
 	.nap {
-		background-color: $baseColor; // go lighter?
+		background-color: $shade; // go lighter?
 	}
 	p.reuse {
-		color: $grey;
+		color: lightgrey;
 	}
 	.dice {
 		@import './components/die';
 		.die {
-			border-color: $shade; // go white?
+			border-color: $white; // go white?
 			color: $white;
 			&.restricted{
-				@include stripe($shade);
+				@include stripe($base);
 			}
 			&.constant {
 				@include dieBoxShadow($tint);
 			}
 			.pip {
-				background-color: $shade;
+				background-color: $tint;
 			}
 		}
 	}
@@ -113,6 +109,18 @@ p {
 .cards .card.type-a {
 	@include card-color($blue);
 }
+.cards .card.type-b {
+	@include card-color($green);
+}
 .cards .card.type-c {
+	@include card-color($flame);
+}
+.cards .card.type-d {
 	@include card-color($yellow);
+}
+.cards .card.type-e {
+	@include card-color($lblue);
+}
+.cards .card.type-f {
+	@include card-color(grey);
 }
