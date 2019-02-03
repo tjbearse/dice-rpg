@@ -1,0 +1,15 @@
+{
+	"actions": [{
+		"id": 1,
+		"name": "Black Goop",
+		"format": "TextAction",
+		"type": "attack",
+		"effect": "[ ] damage of last type taken",
+		"reusable": ""
+	}],
+	"dice": [{
+		"type": "Exact",
+		"val": 6,
+		"actionId": 1
+	}]
+}

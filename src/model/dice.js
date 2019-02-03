@@ -107,29 +107,13 @@ const DieTypes = {
 	Even,
 }
 
-function fromJSON(d) {
-	switch (d.type) {
-	case 'Exact':
-		return Exact.fromJSON(d);
-	case 'Constant':
-		return Constant.fromJSON(d);
-	case 'CountDown':
-		return CountDown.fromJSON(d);
-	case 'Die':
-		return Die.fromJSON(d);
-	case 'Max':
-		return Max.fromJSON(d);
-	case 'Min':
-		return Min.fromJSON(d);
-	case 'Restricted':
-		return Restricted.fromJSON(d);
-	case 'Odd':
-		return Odd.fromJSON(d);
-	case 'Even':
-		return Even.fromJSON(d);
-	default:
-		return new Die();
-	}
+function dieFromJSON(d) {
+	// FIXME this isn't technically right, change use of fn?
+	if (d.constructor && d.constructor.name in DieTypes)
+		return d;
+	if (!d.type || !(d.type in DieTypes))
+		throw Error(d.type + " is not in DieTypes");
+	return DieTypes[d.type].fromJSON(d);
 }
 
 export {
@@ -145,5 +129,5 @@ export {
 	Even,
 
 	DieTypes,
-	fromJSON,
+	dieFromJSON,
 }

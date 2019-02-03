@@ -3,12 +3,41 @@ import './App.scss';
 import {Upgradable} from './model/actions';
 import {Card, FlipCard} from './components/cards';
 import {CardForm} from './components/cardForm';
+import Actions from './myActions';
+
+import {getActions} from './backend';
+
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			actions: [],
+		}
+		this.addAction = this.addAction.bind(this);
+	}
+
+	componentDidMount() {
+		getActions()
+			.then(actions => {
+				this.setState({
+					actions
+				})
+				console.log(actions);
+			}
+			)
+	}
+
+	addAction(a) {
+		this.setState({
+			actions: [a, ...this.state.actions],
+		});
+	}
+
 	render() {
-		let actions = this.props.actions || []
+		let actions = this.state.actions || []
 		return (<div className="cards">
-				<CardForm />
+				<CardForm addAction={this.addAction}/>
 				{ actions.map( a => {
 					if (a instanceof Upgradable)
 						return <FlipCard actionPair={a} key={a.id()}/>
@@ -20,12 +49,12 @@ class App extends Component {
 	}
 }
 
+
 /* TODO
 	- Group
 	- Half card / compact view?
-	- Form for adding quickly
 */
 
 
 
-export default App;
+export default App

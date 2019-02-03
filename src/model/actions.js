@@ -1,4 +1,5 @@
 import {Base, idMixin} from './mixins';
+import {dieFromJSON} from './dice';
 
 class Action extends idMixin(Base) {
 	// one or more Dice
@@ -22,6 +23,7 @@ class Action extends idMixin(Base) {
 	}
 }
 
+// TODO change to "Flipable" or two sided
 class Upgradable extends idMixin(Base) {
 	constructor(base, upgrade) {
 		super()
@@ -46,6 +48,26 @@ class TextAction extends Action {
 		return this.reusable;
 	}
 
+	static fromJSON(json) {
+		let dice = json.dice || []
+		return new TextAction(json.name, json.type, json.effect, json.reusable, dice.map(dieFromJSON))
+	}
 }
 
-export {Action, TextAction, Upgradable}
+const ActionTypes = {
+	TextAction,
+}
+
+function actionFromJSON(a) {
+	if (!(a.format in ActionTypes)) {
+		throw Error(a.format + " not in ActionTypes");
+	}
+	return ActionTypes[a.format].fromJSON(a)
+}
+
+export {
+	Action,
+	TextAction,
+	Upgradable,
+	actionFromJSON,
+}

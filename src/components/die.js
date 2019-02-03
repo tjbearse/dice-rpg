@@ -35,6 +35,7 @@ const CountDown = quickDie(['countdown'], quickContentFn('val'))
 const Exact = quickDie(['fixed'], (die) => <DieFace n={die.val} />)
 const Constant = quickDie(['constant'], (die) => <DieFace n={die.val} />)
 
+// FIXME: this can be a fn, no state
 class DieFace extends Component {
 	render() {
 		let n = Math.max(+(this.props.n), 1);
