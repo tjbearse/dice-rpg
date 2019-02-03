@@ -14,10 +14,28 @@ class Fixed extends Die{
 	}
 }
 
-class Comparison extends Die {
-	constructor(text, n) {
+class Restricted extends Die {
+	constructor(text) {
 		super()
-		this.text = text;
+		this.text = text
+	}
+}
+
+class Even extends Restricted {
+	constructor() {
+		super("EVEN")
+	}
+}
+
+class Odd extends Restricted {
+	constructor() {
+		super("Odd")
+	}
+}
+
+class Comparison extends Restricted {
+	constructor(text, n) {
+		super(text)
 		this.val = n;
 	}
 }
@@ -48,11 +66,6 @@ class Constant extends Die {
 	}
 }
 
-/* TODO
-   - Constant val
-   - Even / Odd
-*/
-
 export {
 	Comparison,
 	Constant,
@@ -61,4 +74,7 @@ export {
 	Fixed,
 	Max,
 	Min,
+	Restricted,
+	Odd,
+	Even,
 }

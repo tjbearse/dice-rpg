@@ -27,6 +27,10 @@ $dice-width: 16mm;
 	align-items:center;
 	flex-direction: column;
 
+	&.restricted {
+		@include stripe($blue-shade);
+		font-size: 14pt;
+	}
 	&.compare {
 		@include stripe($blue-shade);
 		p {

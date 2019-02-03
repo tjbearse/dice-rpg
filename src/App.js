@@ -14,7 +14,6 @@ class App extends Component {
 class Card extends Component {
 	render() {
 		let action = this.props.action;
-		console.log(action);
 		if (!action) {
 			return ''
 		}

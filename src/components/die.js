@@ -22,6 +22,17 @@ class Comparison extends Component {
 	}
 }
 
+class Restricted extends Component {
+	render() {
+		console.log("ok");
+		return (
+			<div className="die restricted">
+				<p> {this.props.die.text} </p>
+			</div>
+		)
+	}
+}
+
 class CountDown extends Component {
 	render() {
 		return (
@@ -82,6 +93,7 @@ class DieFace extends Component {
 
 function getDieComp(d) {
 	if (d instanceof Model.Comparison) return Comparison;
+	if (d instanceof Model.Restricted) return Restricted; // must happen after comparison
 	if (d instanceof Model.CountDown) return CountDown;
 	if (d instanceof Model.Fixed) return Fixed;
 	if (d instanceof Model.Constant) return Constant;
