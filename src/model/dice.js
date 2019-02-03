@@ -1,5 +1,7 @@
 import {Base, idMixin} from './mixins';
 
+// TODO fromJSON should set ID. Make from JSON a mixin or something?
+
 class Die extends idMixin(Base) {
 	static fromJSON(d) {
 		return new Die();
@@ -92,6 +94,19 @@ class Constant extends Die {
 	}
 }
 
+const DieTypes = {
+	Comparison,
+	Constant,
+	CountDown,
+	Die,
+	Exact,
+	Max,
+	Min,
+	Restricted,
+	Odd,
+	Even,
+}
+
 function fromJSON(d) {
 	switch (d.type) {
 	case 'Exact':
@@ -129,5 +144,6 @@ export {
 	Odd,
 	Even,
 
+	DieTypes,
 	fromJSON,
 }

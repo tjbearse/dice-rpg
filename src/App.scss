@@ -31,7 +31,7 @@ p {
 
 
 		$titleSize: 3*$i16;
-		p.name {
+		.name {
 			font-size: $titleSize;
 			margin: 0 0 .125in 0;
 			text-align: center;
@@ -59,13 +59,12 @@ p {
 			@import './components/die';
 		}
 
-		p.effect {
+		.effect {
 			text-align: center;
-			align-self: flex-end;
 			width: 100%; // forces onto bottom
 		}
 
-		p.reuse {
+		.reuse {
 			text-align: center;
 		}
 
@@ -83,7 +82,7 @@ p {
 	.nap {
 		background-color: $shade; // go lighter?
 	}
-	p.reuse {
+	.reuse {
 		color: lightgrey;
 	}
 	.dice {
@@ -156,5 +155,29 @@ p {
 		transform: rotate(180deg);
 		margin-top: 0;
 		margin-bottom: $i16;
+	}
+}
+
+.card.form {
+	.dice {
+		& > .die:hover {
+			opacity: .7;
+		}
+		.dice-form{
+			display: flex;
+
+			.dice-fields {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				div {
+					display: flex;
+					justify-content: space-between;
+					input {
+						width: 50px;
+					}
+				}
+			}
+		}
 	}
 }

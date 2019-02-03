@@ -27,6 +27,7 @@ $dice-width: 16mm;
 	height: $dice-width;
 	border-radius: 3mm;
 	border: dotted $i32;
+	flex: 0 0 auto;
 
 	color: white;
 	margin: 1mm;

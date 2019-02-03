@@ -5,66 +5,39 @@ import * as Model from '../model/dice';
 class Die extends Component {
 	render() {
 		return (
-				<div className="die">
+				<div {...this.props} className={["die", ...this.getClasses()].join(' ')}>
+					{this.getContent(this.props.die)}
 				</div>
 		);
 	}
-}
-
-class Comparison extends Component {
-	render() {
-		return (
-			<div className="die compare">
-				<p> {this.props.die.text} </p>
-				<p> {this.props.die.val} </p>
-			</div>
-		)
+	getClasses() {
+		return []
+	}
+	getContent(d) {
+		return ''
 	}
 }
 
-class Restricted extends Component {
-	render() {
-		return (
-			<div className="die restricted">
-				<p> {this.props.die.text} </p>
-			</div>
-		)
+let quickDie = (classes, contentFn) => class extends Die {
+	getClasses() {
+		return classes;
+	}
+	getContent(d) {
+		return contentFn(d);
 	}
 }
 
-class CountDown extends Component {
-	render() {
-		return (
-			<div className="die countdown">
-				<p> {this.props.die.val} </p>
-			</div>
-		)
-	}
-}
+let quickContentFn = (...props) => ( (die) => props.map((p,i) => <p key={i}> {die[p]} </p>) );
 
-class Exact extends Component {
-	render() {
-		return (
-			<div className={"die fixed"}>
-				<DieFace n={this.props.die.val} />
-			</div>
-		)
-	}
-}
-
-class Constant extends Component {
-	render() {
-		return (
-			<div className={"die constant"}>
-				<DieFace n={this.props.die.val} />
-			</div>
-		)
-	}
-}
+const Comparison = quickDie(['compare'], quickContentFn('text', 'val'))
+const Restricted = quickDie(['restricted'], quickContentFn('text'))
+const CountDown = quickDie(['countdown'], quickContentFn('val'))
+const Exact = quickDie(['fixed'], (die) => <DieFace n={die.val} />)
+const Constant = quickDie(['constant'], (die) => <DieFace n={die.val} />)
 
 class DieFace extends Component {
 	render() {
-		let n = this.props.n;
+		let n = Math.max(+(this.props.n), 1);
 		let fixedClass = "die-face die-face-" + n;
 		let pips;
 		if (n === 4 || n === 5) {
