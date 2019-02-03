@@ -1,15 +1,24 @@
 
 @import './constants';
 
-@mixin stripe($color) {
-	$stripe-width: 4px;
-	background: repeating-linear-gradient(
-		-45deg,
-		$color,
-		$color $stripe-width,
-		#00000000 $stripe-width,
-		#00000000 $stripe-width * 2
-	);
+@mixin dieBoxShadow ($color) {
+	$s: 1mm;
+	background-color: $color;
+	$high: lighten($color, 10%);
+	$med: darken($color, 10%);
+	$low: darken($color, 30%);
+	$dark: darken($color, 40%);
+	$darkest: darken($color, 50%);
+	box-shadow: #{
+		inset 0 $s $high,
+		inset 0 (-$s) $low,
+		inset $s 0 $med,
+		inset (-$s) 0 $med };
+	border: none;
+	.pip {
+		background-color: $dark;
+		box-shadow: #{ inset 0 2px $darkest , inset 0 -2px $low };
+	}
 }
 
 $dice-width: 16mm;
@@ -32,7 +41,7 @@ $dice-width: 16mm;
 		font-size: 14pt;
 	}
 	&.compare {
-		@include stripe($blue-shade);
+		@extend .restricted;
 		p {
 			margin: 0;
 			&:first-of-type {
@@ -55,20 +64,9 @@ $dice-width: 16mm;
 	}
 
 	&.constant {
-		background-color: $blue-tint;
-		$s: 1mm;
 		//TODO these tints could look better
-		box-shadow: #{
-			inset 0 $s white,
-			inset 0 (-$s) #bbb,
-			inset $s 0 #d7d7d7,
-			inset (-$s) 0 #d7d7d7};
-		border: none;
+		@include dieBoxShadow($grey);
 		padding: $i32;
-		.pip {
-			background-color: $blue-shade;
-			box-shadow: inset 0 2px #111, inset 0 -2px #555;
-		}
 	}
 }
 

@@ -61,7 +61,7 @@ p {
 
 			flex: 1 0 auto;
 
-			@import './components/die'
+			@import './components/die';
 		}
 
 		p.effect {
@@ -78,40 +78,41 @@ p {
 	}
 }
 
-.cards .card.type-a {
-	color: yellow; //white, tint this?
-	background-color: green; // $blue-shade
+@mixin card-color($baseColor) {
+	$white: white;
+	$shade: darken($baseColor, 15%);
+	$tint: lighten($baseColor, 20%);
+
+	
+	color: $white; //tint this?
+	background-color: $shade;
 	.nap {
-		background-color: lightgreen; // $blue;
+		background-color: $baseColor; // go lighter?
 	}
 	p.reuse {
-		color: black;// $grey;
+		color: $grey;
 	}
 	.dice {
+		@import './components/die';
 		.die {
-			border-color: orange; // blue-shade
-			color: brown; // white
-			&.compare{
-				// @include stripe(orange); // was blue-shade
+			border-color: $shade; // go white?
+			color: $white;
+			&.restricted{
+				@include stripe($shade);
 			}
 			&.constant {
-				background-color: red; // $blue-tint;
-				/*
-						// combine # { 
-						box-shadow: # {
-							inset 0 $s white,
-							inset 0 (-$s) #bbb,
-							inset $s 0 #d7d7d7,
-							inset (-$s) 0 #d7d7d7};
-			   */
-				.pip {
-					background-color: grey; // $blue-shade;
-					// box-shadow: inset 0 2px #111, inset 0 -2px #555;
-				}
+				@include dieBoxShadow($tint);
 			}
 			.pip {
-				background-color: grey; // $blue-shade;
+				background-color: $shade;
 			}
 		}
 	}
+}
+
+.cards .card.type-a {
+	@include card-color($blue);
+}
+.cards .card.type-c {
+	@include card-color($yellow);
 }

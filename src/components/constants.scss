@@ -2,8 +2,8 @@ $blue: lighten(#577590, 5%);
 $blue-shade: darken($blue, 15%);
 $blue-tint: lighten($blue, 25%);
 
+$yellow: darken(#FFBC42, 15%);
 /*
-$yellow: #FFBC42;
 $yellow-shade: darken($yellow, 25%);
 $yellow-tint: lighten($yellow, 25%);
 
@@ -26,3 +26,14 @@ $grey: darken(white, 20%);
 $i8: 1in / 8;
 $i16: 1in / 16;
 $i32: 1in / 32;
+
+@mixin stripe($color) {
+	$stripe-width: 4px;
+	background: repeating-linear-gradient(
+		-45deg,
+		$color,
+		$color $stripe-width,
+		#00000000 $stripe-width,
+		#00000000 $stripe-width * 2
+	);
+}
