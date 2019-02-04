@@ -52,7 +52,7 @@ class TextAction extends Action {
 		let dice = json.dice || []
 		let a = new TextAction(json.name, json.type, json.effect, json.reusable, dice.map(dieFromJSON))
 		if (json.id)
-			a._id = json.id
+			a.id = json.id
 		return a;
 	}
 }

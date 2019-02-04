@@ -2,6 +2,8 @@
 
 body {
 	background-color: black;
+	cursor: default;
+	color: white;
 }
 
 p {
@@ -9,6 +11,16 @@ p {
 }
 * {
 	box-sizing: border-box;
+}
+
+// text interpolation
+.card {
+	.highlight {
+		font-weight: bold;
+	}
+	.dice-sum::after {
+		content: "\2211";
+	}
 }
 
 .cards {
@@ -23,6 +35,7 @@ p {
 		height: 3.5in;
 		border-radius: .125in;
 		padding: (1in / 8);
+		position: relative;
 
 		flex: 0 0 auto;
 
@@ -35,6 +48,17 @@ p {
 			font-size: $titleSize;
 			margin: 0 0 .125in 0;
 			text-align: center;
+		}
+
+		&:hover .delete {
+			visibility: visible;
+		}
+		.delete {
+			visibility: hidden;
+			flex: none;
+			position: absolute;
+			top: 0;
+			right: 8px;
 		}
 
 		.nap {

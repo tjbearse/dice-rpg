@@ -1,15 +1,47 @@
 {
-	"actions": [{
-		"id": 1,
-		"name": "Black Goop",
-		"format": "TextAction",
-		"type": "attack",
-		"effect": "[ ] damage of last type taken",
-		"reusable": ""
-	}],
-	"dice": [{
-		"type": "Exact",
-		"val": 6,
-		"actionId": 1
-	}]
+  "actions": [
+    {
+      "id": "64man6tky",
+      "name": "Black Goop",
+      "dice": [
+        {
+          "id": "64s4gniyb",
+          "type": "Exact",
+          "val": "6"
+        }
+      ],
+      "type": "attack",
+      "effect": "#sum #damage of the last type taken",
+      "reusable": ""
+    },
+    {
+      "id": "qn25fh30w",
+      "name": "Unweildy Sword",
+      "dice": [
+        {
+          "id": "bs9z4x6lp",
+          "type": "CountDown",
+          "val": "7"
+        }
+      ],
+      "type": "attack",
+      "effect": "1 #damage, twice",
+      "reusable": "Reusable"
+    },
+    {
+      "id": "h3ceu3ztm",
+      "name": "Suit of Armor",
+      "dice": [
+        {
+          "id": "mmtm5z76n",
+          "type": "Max",
+          "text": "MAX",
+          "val": "3"
+        }
+      ],
+      "type": "defend",
+      "effect": "Gain #sum #armor",
+      "reusable": ""
+    }
+  ]
 }

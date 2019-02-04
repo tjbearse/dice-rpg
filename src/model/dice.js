@@ -3,6 +3,10 @@ import {Base, idMixin} from './mixins';
 // TODO fromJSON should set ID. Make from JSON a mixin or something?
 
 class Die extends idMixin(Base) {
+	constructor() {
+		super()
+		this.type = this.constructor.name
+	}
 	static fromJSON(d) {
 		return new Die();
 	}
@@ -112,7 +116,7 @@ function dieFromJSON(d) {
 	if (d.constructor && d.constructor.name in DieTypes)
 		return d;
 	if (!d.type || !(d.type in DieTypes))
-		throw Error(d.type + " is not in DieTypes");
+		return Die.fromJSON(d);
 	return DieTypes[d.type].fromJSON(d);
 }
 

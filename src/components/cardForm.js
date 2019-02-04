@@ -52,7 +52,7 @@ class DiceForm extends Form {
 			<div className="dice">
 				{ this.props.dice.map( d => {
 						let D = getDieComp(d);
-						return <D die={d} onClick={(e) => this.removeDie(d)} key={d.id()}/>
+						return <D die={d} onClick={(e) => this.removeDie(d)} key={d.id}/>
 					})
 				}
 				<div className="dice-form">

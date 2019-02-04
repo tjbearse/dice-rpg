@@ -37,6 +37,22 @@ class API {
 			.then(results => results.map(r => this.deserialize(r)))
 	}
 
+	del (id) {
+		if (typeof id !== "string") {
+			return Promise.reject(Error("id was not a string, " + id));
+		}
+		return fetch(this.url + '/'+ id, {
+			method: 'DELETE',
+		})
+			.then(response => {
+				if (response.status === 200) {
+					return response.json()
+				} else {
+					throw new Error('Something went wrong on api server!');
+				}
+			})
+	}
+
 	post (e) {
 		const body = this.serialize(e);
 		return fetch(this.url, {
@@ -49,7 +65,7 @@ class API {
 		})
 			.then(response => {
 				if (response.status === 201) {
-					return response
+					return response.json()
 				} else {
 					throw new Error('Something went wrong on api server!');
 				}
@@ -62,12 +78,11 @@ class ActionsAPI extends API {
 		super(baseUrl + 'actions')
 	}
 
-	urlForGet() {
-		return super.urlForGet()+'?_embed=dice'
-	}
-
 	deserialize (a) {
 		return actionFromJSON(a);
+	}
+	del (a) {
+		return super.del(String(a.id))
 	}
 }
 

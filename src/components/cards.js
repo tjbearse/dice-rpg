@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import {Upgradable} from '../model/actions';
 import getDieComp from './die';
+import InterpText from './interpText';
 
 class Card extends Component {
 	render() {
@@ -11,7 +12,8 @@ class Card extends Component {
 		}
 		let reusable = action.getReusableText();
 		return (
-			<div className={this.props.className + " card type-"+ action.type}>
+			<div className={" card type-"+ action.type}>
+				<div className="delete" onClick={this.props.remove}>x</div>
 				<p className="name">
 					{ action.name }
 				</p>
@@ -19,12 +21,10 @@ class Card extends Component {
 					<div className="dice">
 						{ action.dice.map( d => {
 								let D = getDieComp(d);
-							return <D die={d} key={d.id()}/>
+							return <D die={d} key={d.id}/>
 							})
 						}
-						<p className="effect">
-							{action.getEffectText()}
-						</p>
+						<InterpText className="effect" text ={action.getEffectText()} />
 					</div>
 					{ reusable && <p className="reuse"> { reusable } </p> }
 				</div>

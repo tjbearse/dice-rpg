@@ -14,6 +14,7 @@ class App extends Component {
 			actions: [],
 		}
 		this.addAction = this.addAction.bind(this);
+		this.removeAction = this.removeAction.bind(this);
 	}
 
 	componentDidMount() {
@@ -22,30 +23,44 @@ class App extends Component {
 				this.setState({
 					actions
 				})
-				console.log(actions);
 			}
 			)
 	}
 
-	addAction(a) {
+	removeAction(a) {
+		let actions = this.state.actions.filter(action => action !== a)
 		this.setState({
-			actions: [a, ...this.state.actions],
+			actions
 		});
+		Actions.del(a)
+	}
+
+	addAction(a) {
 		Actions.post(a)
+			.then(response => {
+				a.id = response.id;
+				this.setState({
+					actions: [a, ...this.state.actions],
+				});
+			})
 	}
 
 	render() {
 		let actions = this.state.actions || []
-		return (<div className="cards">
-				<CardForm addAction={this.addAction}/>
-				{ actions.map( a => {
-					if (a instanceof Upgradable)
-						return <FlipCard actionPair={a} key={a.id()}/>
-					else
-						return <Card action={a} key={a.id()}/>
-					}
-				) }
-				</div>);
+		return (
+			<div>
+				<div className="cards">
+					<CardForm addAction={this.addAction}/>
+					{ actions.map( a => {
+						if (a instanceof Upgradable)
+							return <FlipCard actionPair={a} key={a.id}/>
+						else
+							return <Card remove={()=>{this.removeAction(a)}} action={a} key={a.id}/>
+						}
+					) }
+				</div>
+			</div>
+		);
 	}
 }
 
