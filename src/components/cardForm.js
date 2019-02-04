@@ -110,15 +110,16 @@ class CardForm extends Form {
 	}
 
 	render() {
+		const cls = (this.props.className || '') + " card form type-"+this.state.type
 		return (
 			<form onSubmit={this.handleSubmit} >
-				<div className={"card form type-"+this.state.type}>
-					<label className="name"> Name:
-					<input type="text" onChange={this.handleChange} value={this.state.name} name="name" />
-					</label>
-					<select value={this.state.type} onChange={this.handleChange} name="type">
-				{ Object.keys(Types).map((t) => <option key={t} value={Types[t]}>{t}</option>)}
-					</select>
+				<div className={cls}>
+					<div className="header">
+						<input type="text" onChange={this.handleChange} value={this.state.name} name="name" />
+						<select value={this.state.type} onChange={this.handleChange} name="type">
+							{ Object.keys(Types).map((t) => <option key={t} value={Types[t]}>{t}</option>)}
+						</select>
+					</div>
 					<div className="nap">
 						<DiceForm dice={this.state.dice} handleDiceChange={this.handleDiceChange} />
 						<label className="effect"> Effect:
@@ -136,4 +137,4 @@ class CardForm extends Form {
 }
 
 
-export {CardForm}
+export default CardForm

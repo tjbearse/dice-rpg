@@ -5,7 +5,6 @@ function getHighlight(t, key) {
 	case 'sum':
 		return <span className="highlight dice-sum" key={key} />
 	default:
-		console.log(t);
 		return <span className="highlight" key={key}>{t}</span>;
 	}
 }

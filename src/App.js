@@ -1,73 +1,49 @@
 import React, { Component } from 'react';
 import './App.scss';
-import {Upgradable} from './model/actions';
-import {Card, FlipCard} from './components/cards';
-import {CardForm} from './components/cardForm';
-
-import {Actions} from './backend';
+import CharacterCollection from './components/characterCollection';
+import CharacterEquipment from './components/characterEquipment';
+import AllCardsView from './components/allCardsView';
 
 
 class App extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
-			actions: [],
+			view: 'character'
 		}
-		this.addAction = this.addAction.bind(this);
-		this.removeAction = this.removeAction.bind(this);
 	}
-
-	componentDidMount() {
-		Actions.get()
-			.then(actions => {
-				this.setState({
-					actions
-				})
-			}
-			)
-	}
-
-	removeAction(a) {
-		let actions = this.state.actions.filter(action => action !== a)
-		this.setState({
-			actions
-		});
-		Actions.del(a)
-	}
-
-	addAction(a) {
-		Actions.post(a)
-			.then(response => {
-				a.id = response.id;
-				this.setState({
-					actions: [a, ...this.state.actions],
-				});
-			})
-	}
-
 	render() {
-		let actions = this.state.actions || []
-		return (
-			<div>
-				<div className="cards">
-					<CardForm addAction={this.addAction}/>
-					{ actions.map( a => {
-						if (a instanceof Upgradable)
-							return <FlipCard actionPair={a} key={a.id}/>
-						else
-							return <Card remove={()=>{this.removeAction(a)}} action={a} key={a.id}/>
-						}
-					) }
-				</div>
-			</div>
-		);
+		return <div>
+			<a onClick={()=> { this.setState({ view: 'character' }) }}>Character</a>
+			<a onClick={()=> { this.setState({ view: 'all' }) }}>All</a>
+			<hr/>
+			{ this.state.view === 'character' ? <CharacterView /> : <AllCardsView edit={true}/> }
+		</div>
+	}
+}
+
+class CharacterView extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			character: null,
+		}
+	}
+
+	// TODO move close up here?, share header?
+	render() {
+		if (!this.state.character)
+			return <CharacterCollection select={(character)=>{this.setState({character})}} />
+		else
+			return <CharacterEquipment character={this.state.character} close={()=>{this.setState({character: null})}} />
+			
 	}
 }
 
 
 /* TODO
-	- Group
-	- Half card / compact view?
+   - Group
+   - Half card / compact view?
 */
 
 

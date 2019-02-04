@@ -43,5 +43,72 @@
       "effect": "Gain #sum #armor",
       "reusable": ""
     }
+  ],
+  "characters": [
+    {
+      "id": 1,
+      "name": "Blob Knight",
+      "description": ""
+    }
+  ],
+  "loadouts": [
+    {
+      "id": "xxf9qgbye",
+      "actionId": "64man6tky",
+      "action": {
+        "id": "64man6tky",
+        "name": "Black Goop",
+        "dice": [
+          {
+            "id": "bvbpfsyat",
+            "type": "Exact",
+            "val": "6"
+          }
+        ],
+        "type": "attack",
+        "effect": "#sum #damage of the last type taken",
+        "reusable": ""
+      },
+      "characterId": 1
+    },
+    {
+      "id": "59xyzbkse",
+      "actionId": "qn25fh30w",
+      "action": {
+        "id": "qn25fh30w",
+        "name": "Unweildy Sword",
+        "dice": [
+          {
+            "id": "o6ee95hwy",
+            "type": "CountDown",
+            "val": "7"
+          }
+        ],
+        "type": "attack",
+        "effect": "1 #damage, twice",
+        "reusable": "Reusable"
+      },
+      "characterId": 1
+    },
+    {
+      "id": "0d4hnzw3d",
+      "actionId": "h3ceu3ztm",
+      "action": {
+        "id": "h3ceu3ztm",
+        "name": "Suit of Armor",
+        "dice": [
+          {
+            "id": "5xghtcmmo",
+            "type": "Max",
+            "text": "MAX",
+            "val": "3"
+          }
+        ],
+        "type": "defend",
+        "effect": "Gain #sum #armor",
+        "reusable": ""
+      },
+      "characterId": 1
+    }
   ]
 }

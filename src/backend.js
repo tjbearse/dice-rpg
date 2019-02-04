@@ -1,4 +1,5 @@
 import {actionFromJSON} from './model/actions';
+import Character from './model/character';
 
 const baseUrl = '/api/';
 
@@ -37,7 +38,8 @@ class API {
 			.then(results => results.map(r => this.deserialize(r)))
 	}
 
-	del (id) {
+	del (e) {
+		const id = String(e.id)
 		if (typeof id !== "string") {
 			return Promise.reject(Error("id was not a string, " + id));
 		}
@@ -86,8 +88,39 @@ class ActionsAPI extends API {
 	}
 }
 
+class CharactersAPI extends API {
+	constructor() {
+		super(baseUrl + 'characters')
+	}
+
+	deserialize(c) {
+		return new Character(c.name, c.description, c.id);
+	}
+	equipment(c) {
+		return new CharEquipmentAPI(c.id);
+	}
+}
+
+class CharEquipmentAPI extends API {
+	constructor(id) {
+		super(baseUrl + 'loadouts')
+		this.charId = id;
+	}
+
+	urlForGet() {
+		return baseUrl + 'characters/' + this.charId + '/loadouts?_expand=action';
+	}
+
+	deserialize(e) {
+		e.action = actionFromJSON(e.action);
+		return e
+	}
+}
+
 const Actions = new ActionsAPI()
+const Characters = new CharactersAPI()
 
 export {
 	Actions,
+	Characters,
 }
