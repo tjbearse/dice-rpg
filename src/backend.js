@@ -19,7 +19,7 @@ class API {
 		return this.url
 	}
 
-	urlForPost() {
+	urlForPost(e) {
 		return this.url
 	}
 
@@ -82,9 +82,6 @@ class ActionsAPI extends API {
 
 	deserialize (a) {
 		return actionFromJSON(a);
-	}
-	del (a) {
-		return super.del(String(a.id))
 	}
 }
 

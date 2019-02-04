@@ -15,6 +15,7 @@ class CharacterEquipment extends Component {
 		}
 		this.equipAction = this.equipAction.bind(this);
 		this.unequipAction = this.unequipAction.bind(this);
+		this.addAction = this.addAction.bind(this);
 	}
 
 	componentDidMount() {
@@ -70,7 +71,7 @@ class CharacterEquipment extends Component {
 					removeAction={this.unequipAction}
 					edit={true}
 				>
-					<CardForm className="half" addAction={this.props.addAction} />
+					<CardForm className="half" addAction={this.addAction} />
 				</CardCollection>
 			</div>
 			<hr/>
