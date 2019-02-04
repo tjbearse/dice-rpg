@@ -151,6 +151,9 @@ p {
 }
 .card.type-char {
 	@include card-color($yellow);
+	.description {
+		flex: 1 1 auto;
+	}
 }
 .card.type-e {
 	@include card-color($lblue);
@@ -198,15 +201,16 @@ p {
 }
 
 .card.form {
-	.header {
+	.name {
+		font-size: 14pt;
+		font-weight: normal;
+		min-height: 21px;
+	}
+	.row {
 		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		align-content: space-around;
-
-		.name {
-			font-size: 14pt;
-			font-weight: normal;
+		justify-content: space-between;
+		input, select {
+			flex: 1 1 auto;
 		}
 	}
 	.dice {

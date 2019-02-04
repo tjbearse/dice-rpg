@@ -11,7 +11,7 @@ function getHighlight(t, key) {
 
 // TODO intro icons
 function InterpText(props) {
-	const text = String(props.text)
+	const text = props.text? String(props.text): '';
 	const regex = /#(\w+)/gi;
 
 

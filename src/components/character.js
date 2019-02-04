@@ -18,5 +18,4 @@ function Character(props){
 			</div>
 }
 
-
 export default Character

@@ -50,7 +50,7 @@ class AllCardsView extends Component {
 			selectAction={this.props.select}
 			edit={this.props.edit}
 		>
-			{ this.props.edit && <CardForm addAction={this.props.addAction}/> }
+			{ this.props.edit && <CardForm addAction={this.addAction}/> }
 		</CardCollection>
 	}
 

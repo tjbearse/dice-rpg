@@ -9,6 +9,14 @@ class CharacterCollection extends Component {
 		this.state = {
 			characters: null,
 		}
+		this.addCharacter = this.addCharacter.bind(this);
+	}
+
+	addCharacter() {
+		Characters.post()
+			.then(character => {
+				this.props.select(character);
+			})
 	}
 
 	componentDidMount() {
@@ -17,23 +25,30 @@ class CharacterCollection extends Component {
 				this.setState({
 					characters
 				})
-			}
-			)
+			})
 	}
 
 	render () {
 		const chars = this.state.characters || [];
 		const select = this.props.select || (() => {});
-		return <div className="cards">
-			{chars.map((c, i) => (
-				<Character
-					onClick={()=>{select(c)}}
-					character={c}
-					key={i}
-				/>
-			))}
-		</div>
+		return <CharacterList select={select} characters={chars} >
+			<div onClick={this.addCharacter}>+</div>
+			</CharacterList>
 	}
+}
+
+function CharacterList (props) {
+	const chars = props.characters || [];
+	return <div className="cards">
+		{ props.children }
+		{chars.map((c, i) => (
+			<Character
+				onClick={()=>{props.select(c)}}
+				character={c}
+				key={i}
+			/>
+		))}
+	</div>
 }
 
 export default CharacterCollection

@@ -5,7 +5,42 @@ import CardCollection from './cardCollection';
 import AllCardsView from './allCardsView';
 import Equipment from '../model/equipment';
 import CardForm from './cardForm';
+import CharacterForm from './characterForm';
 
+
+class EditableCharacter extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			editing: false,
+			character: {},
+		}
+		this.update = this.update.bind(this);
+		// this.submit = this.submit.bind(this);
+	}
+	// FIXME this whole thing is just a little funky
+	// TODO submit / finish, should be delegated upwards?
+	// TODO allow delete
+	update(e) {
+		const target = e.target;
+		const value = target.type === 'checkbox' ? target.checked : target.value;
+		const name = target.name;
+
+		this.setState((state) => ({
+			character: Object.assign({}, state.character, { [name]: value })
+		}))
+	}
+	render () {
+		const character = this.props.character;
+		const startEdit = ()=>{this.setState({ editing: true })}
+		const newChar = Object.assign({}, character, this.state.character);
+		console.log(newChar, character, this.state.character);
+
+		return this.state.editing?
+					<CharacterForm handleChange={this.update} character={newChar} /> :
+					<Character onClick={startEdit} character={character} />
+	}
+}
 
 class CharacterEquipment extends Component {
 	constructor(props) {
@@ -42,15 +77,17 @@ class CharacterEquipment extends Component {
 			.post(e)
 			.then((resp) => {
 				e.id = resp.id
-				const equipped = [e, ...this.state.equipped];
-				this.setState({ equipped })
+				this.setState((state)=>({
+					equipped: [e, ...state.equipped]
+				}))
 			});
 	}
 	unequipAction(a) {
 		let equipped = this.state.equipped;
 		const e = equipped.find((e) => a.id === e.actionId)
-		equipped = equipped.filter((eq) => e.id !== eq.id)
-		this.setState({ equipped });
+		this.setState((state) => ({
+			equipped: state.equipped.filter((eq) => e.id !== eq.id),
+		}));
 		Characters.equipment(this.props.character).del(e)
 	}
 
@@ -61,9 +98,7 @@ class CharacterEquipment extends Component {
 		const action = this.state.equipped.map(e => e.action)
 		return <div>
 			<div className="character-equipment">
-				<div>
-					<Character className="full" character={character} />
-				</div>
+				<EditableCharacter character={character} />
 				<CardCollection
 					className="half"
 					actions={action}
