@@ -15,7 +15,7 @@ class CharacterCollection extends Component {
 	addCharacter() {
 		Characters.post()
 			.then(character => {
-				this.props.select(character);
+				this.props.select(character.id);
 			})
 	}
 
@@ -30,8 +30,8 @@ class CharacterCollection extends Component {
 
 	render () {
 		const chars = this.state.characters || [];
-		const select = this.props.select || (() => {});
-		return <CharacterList select={select} characters={chars} >
+		const select = this.props.select ? (c)=>{this.props.select(c.id)} : () => {};
+		return <CharacterList className="half" select={select} characters={chars} >
 			<div onClick={this.addCharacter}>+</div>
 			</CharacterList>
 	}
@@ -39,7 +39,8 @@ class CharacterCollection extends Component {
 
 function CharacterList (props) {
 	const chars = props.characters || [];
-	return <div className="cards">
+	const cls = (props.className || '') + " cards"
+	return <div className={cls}>
 		{ props.children }
 		{chars.map((c, i) => (
 			<Character

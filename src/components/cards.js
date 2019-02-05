@@ -12,6 +12,10 @@ class Card extends Component {
 		}
 		let reusable = action.getReusableText();
 		const cls = this.props.className || "" + " card type-"+action.type
+		const remove = (e) => {
+			e.preventDefault()
+			this.props.remove(e)
+		}
 		return (
 			<div onClick={this.props.onClick} className={cls}>
 				{ this.props.remove ? <div className="delete" onClick={this.props.remove}>x</div> : undefined }

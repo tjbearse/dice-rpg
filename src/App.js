@@ -9,37 +9,26 @@ class App extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			view: 'character'
+			view: 'character',
+			characterId: null,
 		}
 	}
 	render() {
 		return <div>
-			<a onClick={()=> { this.setState({ view: 'character' }) }}>Character</a>
-			<a onClick={()=> { this.setState({ view: 'all' }) }}>All</a>
+			<div className="header" >
+			    <a onClick={()=> { this.setState({ view: 'character', characterId: null }) }}>Character</a>
+			    <a onClick={()=> { this.setState({ view: 'all' }) }}>All</a>
+			</div>
 			<hr/>
-			{ this.state.view === 'character' ? <CharacterView /> : <AllCardsView edit={true}/> }
+			{ this.state.view === 'character' ?
+			    ( this.state.characterId === null ?
+				<CharacterCollection select={(characterId)=>{this.setState({characterId})}} />
+				: <CharacterEquipment characterId={this.state.characterId} />
+			    )
+			  : <AllCardsView edit={true}/> }
 		</div>
 	}
 }
-
-class CharacterView extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			character: null,
-		}
-	}
-
-	// TODO move close up here?, share header?
-	render() {
-		if (!this.state.character)
-			return <CharacterCollection select={(character)=>{this.setState({character})}} />
-		else
-			return <CharacterEquipment character={this.state.character} close={()=>{this.setState({character: null})}} />
-			
-	}
-}
-
 
 /* TODO
    - Group

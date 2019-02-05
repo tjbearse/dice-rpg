@@ -1,63 +1,38 @@
 import React, { Component } from 'react';
 import {Characters, Actions} from '../backend';
-import Character from './character';
 import CardCollection from './cardCollection';
 import AllCardsView from './allCardsView';
 import Equipment from '../model/equipment';
 import CardForm from './cardForm';
-import CharacterForm from './characterForm';
-
-
-class EditableCharacter extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			editing: false,
-			character: {},
-		}
-		this.update = this.update.bind(this);
-		// this.submit = this.submit.bind(this);
-	}
-	// FIXME this whole thing is just a little funky
-	// TODO submit / finish, should be delegated upwards?
-	// TODO allow delete
-	update(e) {
-		const target = e.target;
-		const value = target.type === 'checkbox' ? target.checked : target.value;
-		const name = target.name;
-
-		this.setState((state) => ({
-			character: Object.assign({}, state.character, { [name]: value })
-		}))
-	}
-	render () {
-		const character = this.props.character;
-		const startEdit = ()=>{this.setState({ editing: true })}
-		const newChar = Object.assign({}, character, this.state.character);
-		console.log(newChar, character, this.state.character);
-
-		return this.state.editing?
-					<CharacterForm handleChange={this.update} character={newChar} /> :
-					<Character onClick={startEdit} character={character} />
-	}
-}
+import EditableCharacter from './editableCharacter';
 
 class CharacterEquipment extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			equipped: [],
+			character: null
 		}
 		this.equipAction = this.equipAction.bind(this);
 		this.unequipAction = this.unequipAction.bind(this);
 		this.addAction = this.addAction.bind(this);
+		this.updateCharacter = this.updateCharacter.bind(this);
 	}
 
 	componentDidMount() {
-		Characters.equipment(this.props.character).get()
+		if(!this.props.characterId) throw Error('no character selected');
+		Characters.get(this.props.characterId)
+			.then((c) => {
+				this.setState({
+					character: c
+				})
+				return c;
+			}).then((c) => {
+				return Characters.equipment(c).get()
+			})
 			.then(equipped => {
 				this.setState({
-					equipped
+					equipped,
 				})
 			})
 	}
@@ -71,9 +46,8 @@ class CharacterEquipment extends Component {
 	}
 
 	equipAction(a) {
-		let e = new Equipment(this.props.character, a)
-		console.log('equip', e);
-		Characters.equipment(this.props.character)
+		let e = new Equipment(this.state.character, a)
+		Characters.equipment(this.state.character)
 			.post(e)
 			.then((resp) => {
 				e.id = resp.id
@@ -82,35 +56,45 @@ class CharacterEquipment extends Component {
 				}))
 			});
 	}
+
 	unequipAction(a) {
 		let equipped = this.state.equipped;
 		const e = equipped.find((e) => a.id === e.actionId)
 		this.setState((state) => ({
 			equipped: state.equipped.filter((eq) => e.id !== eq.id),
 		}));
-		Characters.equipment(this.props.character).del(e)
+		Characters.equipment(this.state.character).del(e)
+	}
+
+	updateCharacter(c) {
+		const unchanged = Object.keys(c).every((k) => c[k] === this.state.character[k])
+		if (unchanged) return
+		Characters.patch(c)
+			.then((c) => {
+				this.setState({ character: c })
+			});
 	}
 
 	// character
 	// close
 	render () {
-		const character = this.props.character
+		const character = this.state.character
 		const action = this.state.equipped.map(e => e.action)
+		if (!character) return ''
 		return <div>
 			<div className="character-equipment">
-				<EditableCharacter character={character} />
+				<EditableCharacter updateCharacter={this.updateCharacter} character={character} />
 				<CardCollection
-					className="half"
+					className=""
 					actions={action}
 					addAction={this.equipAction}
 					removeAction={this.unequipAction}
 					edit={true}
 				>
-					<CardForm className="half" addAction={this.addAction} />
 				</CardCollection>
 			</div>
 			<hr/>
-			<AllCardsView edit={false} select={this.equipAction} />
+			<AllCardsView edit={true} select={this.equipAction} />
 		</div>
 	}
 }

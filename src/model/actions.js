@@ -1,6 +1,9 @@
 import {Base, idMixin} from './mixins';
 import {dieFromJSON} from './dice';
 
+// TODO is name a property of equipment? This helps characters be flavored separately
+// TODO relationships between dice, e.g. doubles
+
 class Action extends idMixin(Base) {
 	// one or more Dice
 	// Effect
@@ -61,7 +64,6 @@ const ActionTypes = {
 	TextAction,
 }
 
-// FIXME ID not propagated
 function actionFromJSON(a) {
 	if (!(a.format in ActionTypes)) {
 		a.format = 'TextAction';

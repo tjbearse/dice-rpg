@@ -15,7 +15,10 @@ class API {
 		return JSON.parse(e);
 	}
 
-	urlForGet() {
+	urlForGet(id) {
+		if (id) {
+			return this.url + '/' + id
+		}
 		return this.url
 	}
 
@@ -23,8 +26,26 @@ class API {
 		return this.url
 	}
 
-	get () {
-		return fetch(this.urlForGet(), {
+	getSingle(e) {
+		const url = this.urlForGet(e)
+		return fetch(url, {
+			method: 'GET',
+			mode: 'cors',
+		})
+			.then(response => {
+				if (response.status === 200) {
+					return response.json();
+				} else {
+					throw new Error('Something went wrong on api server!');
+				}
+			})
+			.then(result => this.deserialize(result))
+	}
+
+	get (e) {
+		if(e) return this.getSingle(e);
+		const url = this.urlForGet()
+		return fetch(url, {
 			method: 'GET',
 			mode: 'cors',
 		})
@@ -55,11 +76,32 @@ class API {
 			})
 	}
 
+	patch (e) {
+		const id = String(e.id)
+		const body = this.serialize(e);
+		if (typeof id !== "string") {
+			return Promise.reject(Error("id was not a string, " + id));
+		}
+		return fetch(this.url + '/'+ id, {
+			method: 'PATCH',
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body,
+		})
+			.then(response => {
+				if (response.status === 200) {
+					return response.json()
+				} else {
+					throw new Error('Something went wrong on api server!');
+				}
+			})
+	}
+
 	post (e) {
 		const body = this.serialize(e);
 		return fetch(this.url, {
 			method: 'POST',
-			mode: 'cors',
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -101,10 +143,14 @@ class CharactersAPI extends API {
 class CharEquipmentAPI extends API {
 	constructor(id) {
 		super(baseUrl + 'loadouts')
+		if (!id) throw Error('invalid id passed to equipment api');
 		this.charId = id;
 	}
 
-	urlForGet() {
+	urlForGet(id) {
+		if (id) {
+			return super.urlForGet(id)
+		}
 		return baseUrl + 'characters/' + this.charId + '/loadouts?_expand=action';
 	}
 

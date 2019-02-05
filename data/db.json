@@ -42,13 +42,174 @@
       "type": "defend",
       "effect": "Gain #sum #armor",
       "reusable": ""
+    },
+    {
+      "id": "58eap2lr6",
+      "name": "Shield of Faith",
+      "dice": [
+        {
+          "id": "la498dmxy",
+          "type": "Odd",
+          "text": "Odd"
+        }
+      ],
+      "type": "defend",
+      "effect": "Gain #1 #armor",
+      "reusable": "Reusable"
+    },
+    {
+      "id": "7ycvc10lp",
+      "name": "Idol Swap",
+      "dice": [
+        {
+          "id": "0kti0nla8",
+          "type": "Die"
+        }
+      ],
+      "type": "control",
+      "effect": "Swap a die with another player",
+      "reusable": ""
+    },
+    {
+      "id": "4hypjg5d0",
+      "name": "Pistol",
+      "dice": [
+        {
+          "id": "e7yyktwuc",
+          "type": "Exact",
+          "val": "4"
+        }
+      ],
+      "type": "attack",
+      "effect": "#2 #Damage",
+      "reusable": ""
+    },
+    {
+      "id": "0lzhitogp",
+      "name": "Whip",
+      "dice": [
+        {
+          "id": "x9gztg2e0",
+          "type": "Max",
+          "text": "MAX",
+          "val": "3"
+        }
+      ],
+      "type": "attack",
+      "effect": "#1 #Damage",
+      "reusable": "Reusable"
+    },
+    {
+      "id": "yq92rx3k2",
+      "name": "Ordinance of Ordered Ordnance",
+      "dice": [],
+      "type": "buff",
+      "effect": "First roll is a 1, second a 2, etc. until 6. Does not reset across turns",
+      "reusable": ""
+    },
+    {
+      "id": "d96el6tr3",
+      "name": "Resilient Goop",
+      "dice": [],
+      "type": "buff",
+      "effect": "Damage taken on previous turn is added to a single die",
+      "reusable": ""
+    },
+    {
+      "id": "sbpt215ou",
+      "name": "Snake Eyes",
+      "dice": [
+        {
+          "id": "miqfzsibh",
+          "type": "Exact",
+          "val": "1"
+        },
+        {
+          "id": "sgmclm4di",
+          "type": "Exact",
+          "val": "1"
+        }
+      ],
+      "type": "control",
+      "effect": "No effect",
+      "reusable": "Must be used if possible"
+    },
+    {
+      "id": "e42s94dtk",
+      "name": "Scatter",
+      "dice": [
+        {
+          "id": "xvrdh2inh",
+          "type": "Max",
+          "text": "MAX",
+          "val": "4"
+        }
+      ],
+      "type": "control",
+      "effect": "Split into #sum #d1 dice",
+      "reusable": ""
     }
   ],
   "characters": [
     {
       "id": 1,
       "name": "Blob Knight",
-      "description": ""
+      "description": "Black magic goop in a suit of armor"
+    },
+    {
+      "id": 2,
+      "name": "Tomb Raider"
+    },
+    {
+      "id": 3,
+      "name": "Iron Maiden"
+    },
+    {
+      "id": 4,
+      "name": "The Librarian"
+    },
+    {
+      "id": 5,
+      "name": "Queen Bee"
+    },
+    {
+      "id": 6,
+      "name": "Invincible Sword Princess"
+    },
+    {
+      "id": 7,
+      "name": "Ice Queen"
+    },
+    {
+      "id": 8,
+      "name": "Countess",
+      "description": "Regal, numerical, bossy.\nControl"
+    },
+    {
+      "id": 9,
+      "name": "Mama Bear"
+    },
+    {
+      "id": 10,
+      "name": "Valerie Valkyrie"
+    },
+    {
+      "id": 11,
+      "name": "Little Red Riding Hood"
+    },
+    {
+      "id": 12,
+      "name": "Swashbuckler",
+      "description": "Duelist\n"
+    },
+    {
+      "id": 13,
+      "name": "Hound Master"
+    },
+    {
+      "id": 14,
+      "name": "Pied Piper",
+      "description": "\nDice control for small numbers"
     }
   ],
   "loadouts": [
@@ -91,14 +252,71 @@
       "characterId": 1
     },
     {
-      "id": "0d4hnzw3d",
+      "id": "tuhpjea39",
+      "actionId": "7ycvc10lp",
+      "action": {
+        "id": "7ycvc10lp",
+        "name": "Idol Swap",
+        "dice": [
+          {
+            "id": "0kti0nla8",
+            "type": "Die"
+          }
+        ],
+        "type": "control",
+        "effect": "Swap a die with another player",
+        "reusable": ""
+      },
+      "characterId": 2
+    },
+    {
+      "id": "8mkxzyrzn",
+      "actionId": "4hypjg5d0",
+      "action": {
+        "id": "4hypjg5d0",
+        "name": "Pistol",
+        "dice": [
+          {
+            "id": "e7yyktwuc",
+            "type": "Exact",
+            "val": "4"
+          }
+        ],
+        "type": "attack",
+        "effect": "#2 #Damage",
+        "reusable": ""
+      },
+      "characterId": 2
+    },
+    {
+      "id": "jpix8s99o",
+      "actionId": "0lzhitogp",
+      "action": {
+        "id": "0lzhitogp",
+        "name": "Whip",
+        "dice": [
+          {
+            "id": "x9gztg2e0",
+            "type": "Max",
+            "text": "MAX",
+            "val": "3"
+          }
+        ],
+        "type": "attack",
+        "effect": "#1 #Damage",
+        "reusable": "Reusable"
+      },
+      "characterId": 2
+    },
+    {
+      "id": "8fpeayyka",
       "actionId": "h3ceu3ztm",
       "action": {
         "id": "h3ceu3ztm",
         "name": "Suit of Armor",
         "dice": [
           {
-            "id": "5xghtcmmo",
+            "id": "wyoukevn4",
             "type": "Max",
             "text": "MAX",
             "val": "3"
@@ -109,6 +327,76 @@
         "reusable": ""
       },
       "characterId": 1
+    },
+    {
+      "id": "bbuf97g2z",
+      "actionId": "yq92rx3k2",
+      "action": {
+        "id": "yq92rx3k2",
+        "name": "Ordinance of Ordered Ordnance",
+        "dice": [],
+        "type": "buff",
+        "effect": "First roll is a 1, second a 2, etc. until 6. Does not reset across turns",
+        "reusable": ""
+      },
+      "characterId": 8
+    },
+    {
+      "id": "5bly4cgwa",
+      "actionId": "d96el6tr3",
+      "action": {
+        "id": "d96el6tr3",
+        "name": "Resilient Goop",
+        "dice": [],
+        "type": "buff",
+        "effect": "Damage taken on previous turn is added to a single die",
+        "reusable": ""
+      },
+      "characterId": 1
+    },
+    {
+      "id": "ilq210frn",
+      "actionId": "sbpt215ou",
+      "action": {
+        "id": "sbpt215ou",
+        "name": "Snake Eyes",
+        "dice": [
+          {
+            "id": "wr13j2oxz",
+            "type": "Exact",
+            "val": "1"
+          },
+          {
+            "id": "b9i0p2o6f",
+            "type": "Exact",
+            "val": "1"
+          }
+        ],
+        "type": "control",
+        "effect": "No effect",
+        "reusable": "Must be used if possible"
+      },
+      "characterId": 2
+    },
+    {
+      "id": "7tcwsqwcb",
+      "actionId": "e42s94dtk",
+      "action": {
+        "id": "e42s94dtk",
+        "name": "Scatter",
+        "dice": [
+          {
+            "id": "xvrdh2inh",
+            "type": "Max",
+            "text": "MAX",
+            "val": "4"
+          }
+        ],
+        "type": "control",
+        "effect": "Split into #sum #d1 dice",
+        "reusable": ""
+      },
+      "characterId": 14
     }
   ]
 }

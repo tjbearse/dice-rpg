@@ -13,6 +13,24 @@ p {
 	box-sizing: border-box;
 }
 
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.column {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.header {
+    a {
+	margin: 4px 8px;
+	display: inline-block;
+    }
+}
+
 // text interpolation
 .card {
 	.highlight {
@@ -119,7 +137,7 @@ p {
 	.nap {
 		background-color: $shade; // go lighter?
 	}
-	.reuse {
+	.reuse:not(input) {
 		color: lightgrey;
 	}
 	.dice {
@@ -146,17 +164,31 @@ p {
 .card.type-defend {
 	@include card-color($blue);
 }
-.card.type-b {
+.card.type-control {
 	@include card-color($green);
+}
+.card.type-debuff {
+	@include card-color($purple);
+}
+.card.type-buff {
+	@include card-color($lblue);
 }
 .card.type-char {
 	@include card-color($yellow);
 	.description {
 		flex: 1 1 auto;
+		font-size: 12pt;
 	}
-}
-.card.type-e {
-	@include card-color($lblue);
+	textarea.description {
+		font-size: 12pt;
+		border: none;
+		resize: none;
+		padding: .125in;
+	}
+	input.name {
+		height: 26px;
+		margin-bottom: .125in - 6px;
+	}
 }
 /*
 .cards .card {
@@ -181,12 +213,12 @@ p {
 			.dice {
 				.die {
 				}
-				p.effect {
+				.effect {
 					margin-top: $i32;
 					margin-bottom: $i32;
 				}
 			}
-			p.reuse {
+			.reuse {
 				flex: 1 1 auto;
 				margin-top: $i32;
 				margin-bottom: $i16;
